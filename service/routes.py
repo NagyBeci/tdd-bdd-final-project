@@ -65,9 +65,9 @@ def check_content_type(content_type):
     )
 
 
-######################################################################
-# C R E A T E   A   N E W   P R O D U C T
-######################################################################
+# CREAET A NEW PRODUCT
+
+
 @app.route("/products", methods=["POST"])
 def create_products():
     """
@@ -93,9 +93,10 @@ def create_products():
     location_url = "/"  # delete once READ is implemented
     return jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
 
-######################################################################
-# LIST PRODUCTS
-######################################################################
+
+# LIST A PRODUCT
+
+
 @app.route("/products", methods=["GET"])
 def list_products():
     """Returns a list of Products"""
@@ -127,9 +128,10 @@ def list_products():
     app.logger.info("[%s] Products returned", len(results))
     return results, status.HTTP_200_OK
 
-######################################################################
+
 # READ A PRODUCT
-######################################################################
+
+
 @app.route("/products/<int:product_id>", methods=["GET"])
 def get_products(product_id):
     """
@@ -145,9 +147,11 @@ def get_products(product_id):
 
     app.logger.info("Returning product: %s", product.name)
     return product.serialize(), status.HTTP_200_OK
-######################################################################
-# UPDATE AN EXISTING PRODUCT
-######################################################################
+
+
+# UPDATE EXISTING PRODUCT
+
+
 @app.route("/products/<int:product_id>", methods=["PUT"])
 def update_products(product_id):
     """
@@ -166,9 +170,12 @@ def update_products(product_id):
     product.id = product_id
     product.update()
     return product.serialize(), status.HTTP_200_OK
-######################################################################
-# DELETE A PRODUCT
-######################################################################
+
+
+
+# DELETE PRODUCT
+
+
 @app.route("/products/<int:product_id>", methods=["DELETE"])
 def delete_products(product_id):
     """

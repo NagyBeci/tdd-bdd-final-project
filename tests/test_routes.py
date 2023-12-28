@@ -164,13 +164,9 @@ class TestProductRoutes(TestCase):
         response = self.client.post(BASE_URL, data={}, content_type="plain/text")
         self.assertEqual(response.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
-    #
-    # ADD YOUR TEST CASES HERE
-    #
-
-    ######################################################################
-    # Utility functions
-    ######################################################################
+#################################################################################
+# M Y    T E S T    C A S E S
+#################################################################################
 
     def get_product_count(self):
         """save the current number of products"""
