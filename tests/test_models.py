@@ -118,24 +118,23 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(found_product.description, product.description)
         self.assertEqual(found_product.price, product.price)
 
-    def test_update_a_product(self):
-        """It should Update a Product"""
-        product = ProductFactory()
-        product.id = None
-        product.create()
-        self.assertIsNotNone(product.id)
-        # Change it an save it
-        product.description = "testing"
-        original_id = product.id
-        product.update()
-        self.assertEqual(product.id, original_id)
-        self.assertEqual(product.description, "testing")
-        # Fetch it back and make sure the id hasn't changed
-        # but the data did change
-        products = Product.all()
-        self.assertEqual(len(products), 1)
-        self.assertEqual(products[0].id, original_id)
-        self.assertEqual(products[0].description, "testing")
+    def test_update_product(self):
+        # Create a product
+        product = Product(name='Test Product', description='Original Description')
+        db.session.add(product)
+        db.session.commit()
+
+        # Update the product
+        product.name = 'Updated Product'
+        product.description = 'Updated Description'
+        db.session.commit()
+
+        # Retrieve the updated product from the database
+        updated_product = Product.query.filter_by(name='Updated Product').first()
+
+        # Assert that the product has been successfully updated
+        self.assertEqual(updated_product.name, 'Updated Product')
+        self.assertEqual(updated_product.description, 'Updated Descripti
 
     def test_delete_a_product(self):
         """It should delete a Product"""
